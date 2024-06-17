@@ -1,0 +1,22 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.19.0",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.19.0",
+    "libraryName": "PnPSPFxLiveReloader",
+    "libraryId": "8efb81af-7fba-40a7-bd48-48a12bdb4c54",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "PnPSPFxLiveReloader",
+    "solutionShortDescription": "PnP SPFx Live Reloader description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "extension",
+    "extensionType": "ApplicationCustomizer"
+  }
+}

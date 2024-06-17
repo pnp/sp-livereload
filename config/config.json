@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "pnpspfxlivereloader": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/pnPSpFxLiveReloader/PnPSpFxLiveReloaderApplicationCustomizer.js",
+          "manifest": "./src/extensions/pnPSpFxLiveReloader/PnPSpFxLiveReloaderApplicationCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "PnPSpFxLiveReloaderApplicationCustomizerStrings": "lib/extensions/pnPSpFxLiveReloader/loc/{locale}.js"
+  }
+}

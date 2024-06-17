@@ -1,0 +1,12 @@
+@use '../../../../node_modules/@n8d/htwoo-core/lib/sass/00-base/colors/colors' as dt;
+
+.alert-indicator {
+    width: 1.5rem;
+    height: 1.5rem;
+    // border: 1px dt.$neutral-600 solid;
+    background-color: dt.$neutral-200;
+    border-radius: 50px;
+    background: #e0e0e0;
+    box-shadow: inset 0.25rem 0.25rem 1rem #bebebe,
+                inset -0.25rem -0.25rem 1rem #ffffff;
+}

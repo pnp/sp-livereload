@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <CustomAction
+        Title="PnPSpFxLiveReloader"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ClientSideComponentId="615a81e7-90ee-4d27-9b08-4968b4f9988e"
+        ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </CustomAction>
+</Elements>
