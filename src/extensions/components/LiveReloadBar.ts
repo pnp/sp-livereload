@@ -2,6 +2,7 @@ import { ILiveReloaderMessage } from '../common/ILivereloaderMessage';
 import { LiveReloaderState } from '../common/LiveReloaderState';
 import { LogDebug } from '../common/Logger';
 import { AvailablityState } from './AvailabilityState';
+import { BrandingInfo } from './BrandingInfo';
 import { HooToggle } from './HooToggle';
 
 export default class LiveReloadBar {
@@ -20,38 +21,8 @@ export default class LiveReloadBar {
     _toggle: HooToggle;
     _avalibility: AvailablityState;
 
-    // connect = (event: Event): void => {
-
-    //     Logger.debug(event);
-
-    //     Logger.debug(this._domContainer.parentElement);
-
-    //     if (this._parentDom === null) {
-    //         throw Error("No parent DOM Elementn");
-    //     }
-
-    //     this.setState({ available: this._liveReloaderState.available, connected: true } as LiveReloaderState);
-    //     LogDebug(this._liveReloaderState);
-    //     this.connectLiveReload();
-    // }
-
-    // disconnect = (event: Event): void => {
-
-    //     Logger.debug(event);
-
-    //     Logger.debug(this._domContainer.parentElement);
-
-    //     if (this._parentDom === null) {
-    //         throw Error("No parent DOM Elementn");
-    //     }
-
-    //     this.setState({ available: this._liveReloaderState.available, connected: false } as LiveReloaderState);
-    //     LogDebug(this._liveReloaderState);
-    //     this.connectLiveReload();
-    // }
-
     changeConnection = (event: Event): void => {
-        this.setState({ available: this._liveReloaderState.available, connected: !this._liveReloaderState.connected } as LiveReloaderState);
+        this.setState({ available: this._liveReloaderState.available, connected: !this._liveReloaderState.connected });
         this.connectLiveReload();
     }
 
@@ -97,6 +68,7 @@ export default class LiveReloadBar {
         this._parentDom = parentElement;
         this.updateUI(state);
         this.connectLiveReload();
+        new BrandingInfo(parentElement);
 
     }
 
@@ -136,7 +108,7 @@ export default class LiveReloadBar {
 
         console.debug(state, this._liveReloaderState);
 
-        this._liveReloaderState.setState(state);
+        this._liveReloaderState.state = state;
 
         if (this._liveReloaderState.available !== undefined) {
             this._toggle.enabled = this._liveReloaderState.available;
@@ -147,11 +119,11 @@ export default class LiveReloadBar {
             this._toggle.checked = this._liveReloaderState.connected;
         }
 
-        // this._liveReloaderState.setState(state);
-        if (callback) {
+        // // this._liveReloaderState.setState(state);
+        // if (callback) {
 
-            callback();
-        }
+        //     callback();
+        // }
 
     }
 

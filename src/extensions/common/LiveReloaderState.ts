@@ -3,7 +3,7 @@ import { LogDebug } from "./Logger";
 
 const SESSION_STORAGE_KEY = "pnp-live-reloader";
 
-export class LiveReloaderState implements ILiveReloaderState {
+export class LiveReloaderState {
 
     private _available?: boolean;
     private _connected?: boolean;
@@ -16,9 +16,9 @@ export class LiveReloaderState implements ILiveReloaderState {
             console.debug(' NOOOTTTHING ');
         } else {
             const sessionSettiings = JSON.parse(storageItem) as ILiveReloaderState;
-            sessionSettiings.available = false; 
+            sessionSettiings.available = false;
             LogDebug('Session Storage', sessionSettiings);
-            this.setState(sessionSettiings);
+            this.state = sessionSettiings;
         }
 
     }
@@ -71,7 +71,7 @@ export class LiveReloaderState implements ILiveReloaderState {
         }
     }
 
-    public setState(state: ILiveReloaderState): void {
+    set state(state: ILiveReloaderState) {
 
         LogDebug('UPDATING state ...', state);
 

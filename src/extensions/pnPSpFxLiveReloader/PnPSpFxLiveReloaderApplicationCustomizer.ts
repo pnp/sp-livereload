@@ -45,9 +45,9 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
     // LogDebug('INIT LIVE RELOADER STATE\n\t', this._liveReloaderState, connectionResponse);
 
     if (connectionResponse && connectionResponse.status === 200) {
-      this._liveReloaderState.setState({ available: true, connected: this._liveReloaderState.connected } as LiveReloaderState);
+      this._liveReloaderState.setState({ available: true, connected: this._liveReloaderState.connected });
     } else {
-      this._liveReloaderState.setState({ available: false, connected: false } as LiveReloaderState);
+      this._liveReloaderState.setState({ available: false, connected: false });
     }
 
     return Promise.resolve();
