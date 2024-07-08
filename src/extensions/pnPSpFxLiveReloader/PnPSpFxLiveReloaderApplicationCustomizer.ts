@@ -4,7 +4,7 @@ import {
   PlaceholderName
 } from '@microsoft/sp-application-base';
 
-import { LiveReloaderState } from '../common/LiveReloaderState';
+import { lrs } from '../common/LiveReloaderService';
 import LiveReloadBar from '../components/LiveReloadBar';
 
 import { LogDebug, LogError } from '../common/Logger';
@@ -36,18 +36,17 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
   _themeVariant: IReadonlyTheme | undefined;
   _styles: CSSStyleDeclaration;
   _bottomPlaceholder: PlaceholderContent | undefined;
-  _liveReloaderState: LiveReloaderState;
   _liveReloaderBar: LiveReloadBar;
 
   private async checkLiveReloadStatus() {
 
     const connectionResponse = await this._checkConnection();
-    // LogDebug('INIT LIVE RELOADER STATE\n\t', this._liveReloaderState, connectionResponse);
+    // LogDebug('INIT LIVE RELOADER STATE\n\t', lrs, connectionResponse);
 
     if (connectionResponse && connectionResponse.status === 200) {
-      this._liveReloaderState.setState({ available: true, connected: this._liveReloaderState.connected });
+      lrs.state = { available: true, connected: lrs.connected };
     } else {
-      this._liveReloaderState.setState({ available: false, connected: false });
+      lrs.state = { available: false, connected: false };
     }
 
     return Promise.resolve();
@@ -97,7 +96,7 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
 
     } catch {
       
-      LogDebug(' Connection not avaliabled ');
+      LogDebug(' Connection not available ');
       return null;
     }
 
@@ -132,9 +131,9 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
           this._bottomPlaceholder.domElement.setAttribute('style', this._styles.cssText);
           this._bottomPlaceholder.domElement.classList.add(styles.pnpLiveReloader);
 
-          this._liveReloaderBar = new LiveReloadBar(this._liveReloaderState, this._bottomPlaceholder.domElement);
+          this._liveReloaderBar = new LiveReloadBar(this._bottomPlaceholder.domElement);
 
-          this._liveReloaderBar.setState(this._liveReloaderState);
+          this._liveReloaderBar.setState();
 
           this._bottomPlaceholder.domElement.classList.add(styles.pnpLiveReloader);
 
@@ -167,8 +166,7 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
     this.initThemes();
 
     // Init Live Reloader State
-    this._liveReloaderState = new LiveReloaderState();
-    LogDebug("Current State :::", this._liveReloaderState);
+    LogDebug("Current State :::", lrs.state);
 
     try {
 

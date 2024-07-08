@@ -1,6 +1,6 @@
 export interface ILiveReloaderState {
     available: boolean,
-    connected: boolean
+    connected: boolean,
 }
 
 export interface ILiveReloaderSession {

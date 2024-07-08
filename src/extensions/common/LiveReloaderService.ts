@@ -3,7 +3,13 @@ import { LogDebug } from "./Logger";
 
 const SESSION_STORAGE_KEY = "pnp-live-reloader";
 
-export class LiveReloaderState {
+export interface ILiveReloaderService {
+  available: boolean;
+  connected: boolean;
+  state: {available: boolean; connected: boolean; }
+}
+
+export class LiveReloaderService implements ILiveReloaderService {
 
     private _available?: boolean;
     private _connected?: boolean;
@@ -13,19 +19,19 @@ export class LiveReloaderState {
         const storageItem = sessionStorage.getItem(SESSION_STORAGE_KEY);
 
         if (storageItem === null) {
-            console.debug(' NOOOTTTHING ');
+            console.debug(' No storage entity found ');
         } else {
-            const sessionSettiings = JSON.parse(storageItem) as ILiveReloaderState;
-            sessionSettiings.available = false;
-            LogDebug('Session Storage', sessionSettiings);
-            this.state = sessionSettiings;
+            const sessionSettings = JSON.parse(storageItem) as ILiveReloaderState;
+            sessionSettings.available = false;
+            LogDebug('Session Storage', sessionSettings);
+            this.state = sessionSettings;
         }
 
     }
 
-    private updateSessionState(state: ILiveReloaderState): void {
+    private _updateSessionState(state: ILiveReloaderState): void {
 
-        console.debug('SESSSION STATE')
+        console.debug('SESSION STATE')
         const sessionState = {
 
             connected: state.connected
@@ -87,8 +93,10 @@ export class LiveReloaderState {
 
         }
 
-        this.updateSessionState(state);
+        this._updateSessionState(state);
 
     }
 
 }
+
+export const lrs = new LiveReloaderService();

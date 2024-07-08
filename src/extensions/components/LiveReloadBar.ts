@@ -1,7 +1,9 @@
-import { ILiveReloaderMessage } from '../common/ILivereloaderMessage';
-import { LiveReloaderState } from '../common/LiveReloaderState';
+/* eslint-disable no-new */
+import { ILiveReloaderMessage } from '../common/ILiveReloaderMessage';
+import { ILiveReloaderState } from '../common/ILiveReloaderState';
+import { lrs } from '../common/LiveReloaderService';
 import { LogDebug } from '../common/Logger';
-import { AvailablityState } from './AvailabilityState';
+import { AvailabilityState } from './AvailabilityState';
 import { BrandingInfo } from './BrandingInfo';
 import { HooToggle } from './HooToggle';
 
@@ -17,18 +19,17 @@ export default class LiveReloadBar {
     _domContainer = new DocumentFragment();
     _stateAvailable: HTMLOutputElement;
     _stateConnected: HTMLOutputElement;
-    _liveReloaderState: LiveReloaderState;
     _toggle: HooToggle;
-    _avalibility: AvailablityState;
+    _availability: AvailabilityState;
 
     changeConnection = (event: Event): void => {
-        this.setState({ available: this._liveReloaderState.available, connected: !this._liveReloaderState.connected });
+        this.setState();
         this.connectLiveReload();
     }
 
     private connectLiveReload() {
         // create a new <script> element
-        if (this._liveReloaderState.available) {
+        if (lrs.available) {
 
 
             if (!this._connection) {
@@ -42,7 +43,7 @@ export default class LiveReloadBar {
                 this._connection.addEventListener('message', (event) => {
                     if (event.data) {
                         const msgCommand = JSON.parse(event.data) as ILiveReloaderMessage;
-                        if (this._liveReloaderState.state.connected && msgCommand.command && msgCommand.command === 'reload') {
+                        if (lrs.state.connected && msgCommand.command && msgCommand.command === 'reload') {
                             window.location.reload();
                         }
                         LogDebug('MESSAGE COMMAND::::', msgCommand);
@@ -59,20 +60,18 @@ export default class LiveReloadBar {
 
     }
 
-    constructor(state: LiveReloaderState, parentElement: HTMLElement) {
+    constructor( parentElement: HTMLElement) {
 
-        this._liveReloaderState = state;
-
-        console.debug('------', this._liveReloaderState, state);
+        console.debug('------', lrs, lrs.state);
 
         this._parentDom = parentElement;
-        this.updateUI(state);
+        this.updateUI(lrs.state);
         this.connectLiveReload();
         new BrandingInfo(parentElement);
 
     }
 
-    updateUI(state: LiveReloaderState) {
+    updateUI(state: ILiveReloaderState) {
 
         const section: HTMLElement = document.createElement('section') as HTMLElement;
         Object.assign(section, {
@@ -80,14 +79,12 @@ export default class LiveReloadBar {
         })
         this._domContainer.appendChild(section);
 
-        this._avalibility = new AvailablityState(this._liveReloaderState, section);
+        this._availability = new AvailabilityState(lrs, section);
 
         this._toggle = new HooToggle({ labelInactive: "Disconnected", labelActive: "Connected" }, section);
         this._toggle.addEventListener('click', this.changeConnection);
 
-        
-
-        this.setState(state);
+        this.setState();
 
         this._parentDom.append(this._domContainer);
 
@@ -104,22 +101,20 @@ export default class LiveReloadBar {
 
     }
 
-    setState(state: LiveReloaderState, callback?: () => void) {
+    setState() {
 
-        console.debug(state, this._liveReloaderState);
+        console.debug(lrs.state);
 
-        this._liveReloaderState.state = state;
-
-        if (this._liveReloaderState.available !== undefined) {
-            this._toggle.enabled = this._liveReloaderState.available;
-            this._avalibility.available = this._liveReloaderState.available;
+        if (lrs.available !== undefined) {
+            this._toggle.enabled = lrs.available;
+            this._availability.available = lrs.available;
         }
 
-        if (this._liveReloaderState.connected !== undefined) {
-            this._toggle.checked = this._liveReloaderState.connected;
+        if (lrs.connected !== undefined) {
+            this._toggle.checked = lrs.connected;
         }
 
-        // // this._liveReloaderState.setState(state);
+        // // lrs.setState(state);
         // if (callback) {
 
         //     callback();

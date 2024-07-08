@@ -1,24 +1,24 @@
 import { ILiveReloaderState } from "../common/ILiveReloaderState";
 
-export class AvailablityState {
+export class AvailabilityState {
 
-    _state: ILiveReloaderState;
-    _container: HTMLDivElement;
-    _indicator: HTMLElement;
-    _label: HTMLLabelElement;
+  _state: ILiveReloaderState;
+  _container: HTMLDivElement;
+  _indicator: HTMLElement;
+  _label: HTMLLabelElement;
 
-    constructor(state: ILiveReloaderState, parentDom: HTMLElement) {
+  constructor(state: ILiveReloaderState, parentDom: HTMLElement) {
 
-        this._state = state;
-        this.createIndicator(parentDom);
+    this._state = state;
+    this.createIndicator(parentDom);
 
-    }
+  }
 
-    createIndicator(parentDom: HTMLElement) {
+  createIndicator(parentDom: HTMLElement) {
 
-        let domParser = new DOMParser();
+    const domParser = new DOMParser();
 
-        let doc = domParser.parseFromString(`
+    const doc = domParser.parseFromString(`
             <div class='status'>
                 <div class='status-indicator'>
                 </div>
@@ -26,29 +26,32 @@ export class AvailablityState {
             </div>
             `, "text/html")
 
-        this._container = doc.body.firstChild as HTMLDivElement;
-        this._indicator = doc.querySelector('.status-indicator') as HTMLElement;
-        this._label = doc.querySelector('.status-label') as HTMLLabelElement;
-        this._label.textContent = this._state.available ? 'Available' : 'Not Available'
+    this._container = doc.body.firstChild as HTMLDivElement;
+    this._indicator = doc.querySelector('.status-indicator') as HTMLElement;
+    this._label = doc.querySelector('.status-label') as HTMLLabelElement;
+    this._label.textContent = this._state.available ? 'Available' : 'Not Available'
 
-        if (this._state) {
+    if (this._state) {
 
-            this._state.available ? this._indicator.classList.add('ready') : this._indicator.classList.remove('ready');
-
-        }
-
-        parentDom.append(this._container);
+      if (this._state.available) { this._indicator.classList.add('ready') } else { this._indicator.classList.remove('ready') }
 
     }
 
-    
-    public set available(v : boolean) {
-        this._state.available = v;
-    }
-    
+    parentDom.append(this._container);
 
-    setState(state: ILiveReloaderState) {
-        this._state = state;
-    }
+  }
+
+
+  public get available(): boolean {
+    return this._state.available;
+  }
+
+  public set available(v: boolean) {
+    this._state.available = v;
+  }
+
+  setState(state: ILiveReloaderState) {
+    this._state = state;
+  }
 
 }

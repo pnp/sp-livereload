@@ -1,30 +1,30 @@
 import { LogDebug } from "../common/Logger";
 
 export interface IHooToggle {
-    labelActive: string,
-    labelInactive: string,
+  labelActive: string,
+  labelInactive: string,
 }
 
 export class HooToggle {
 
-    _ID: string;
-    _component: HTMLElement;
-    _inputToggle: HTMLInputElement;
-    _inputLabel: HTMLLabelElement;
-    _inputStateActive: HTMLOutputElement;
-    _inputStateInactive: HTMLOutputElement;
+  _ID: string;
+  _component: HTMLElement;
+  _inputToggle: HTMLInputElement;
+  _inputLabel: HTMLLabelElement;
+  _inputStateActive: HTMLOutputElement;
+  _inputStateInactive: HTMLOutputElement;
 
-    constructor(labels: IHooToggle, appendTo: HTMLElement) {
+  constructor(labels: IHooToggle, appendTo: HTMLElement) {
 
-        if (!appendTo) {
-            throw "I don't know where to append it to the DOM";
-        }
+    if (!appendTo) {
+      throw new Error("I don't know where to append it to the DOM");
+    }
 
-        const domParser = new DOMParser();
+    const domParser = new DOMParser();
 
-        this._generateID();
+    this._generateID();
 
-        const domControls = domParser.parseFromString(`<div class="hoo-toggle">
+    const domControls = domParser.parseFromString(`<div class="hoo-toggle">
             <input type="checkbox" class="hoo-toggle-cb" name="toggleName" id="toggle-44">
             <label for= "toggle-44" class="hoo-toggle-label"> 
                 <output class= "hoo-toggle-slider"></output>
@@ -32,57 +32,62 @@ export class HooToggle {
             </label>
         </div>`, "text/html");
 
-        const input = domControls.querySelector('.hoo-toggle-cb');
-        if (input) {
-            this._inputToggle = input as HTMLInputElement;
-            this._inputToggle.id = this._ID;
-        }
-        LogDebug(input);
-
-        const toggleLabel = domControls.querySelector('.hoo-toggle-label');
-        if (toggleLabel) {
-            this._inputLabel = toggleLabel as HTMLLabelElement;
-            this._inputLabel.setAttribute('for', this._ID);
-        }
-        LogDebug(toggleLabel);
-
-        const lblInactive = domControls.querySelector('.hoo-toggle-unchecked');
-        if (lblInactive) {
-            this._inputStateInactive = lblInactive as HTMLOutputElement;
-            this._inputStateInactive.textContent = labels.labelInactive;
-        }
-        LogDebug(lblInactive);
-
-        const lblActive = domControls.querySelector('.hoo-toggle-checked');
-        if (lblInactive) {
-            this._inputStateActive = lblActive as HTMLOutputElement;
-            this._inputStateActive.textContent = labels.labelActive;
-        }
-        LogDebug(lblActive);
-        LogDebug(domControls);
-
-        appendTo.append(domControls.body.firstChild as Node);
-
+    const input = domControls.querySelector('.hoo-toggle-cb');
+    if (input) {
+      this._inputToggle = input as HTMLInputElement;
+      this._inputToggle.id = this._ID;
     }
+    LogDebug(input);
 
-    _generateID() {
-        this._ID = 'hoo-toggle-' + Math.floor(Math.random() * 10000);
+    const toggleLabel = domControls.querySelector('.hoo-toggle-label');
+    if (toggleLabel) {
+      this._inputLabel = toggleLabel as HTMLLabelElement;
+      this._inputLabel.setAttribute('for', this._ID);
     }
+    LogDebug(toggleLabel);
 
-
-    set enabled(value: boolean) {
-        this._inputToggle.disabled = !value;
+    const lblInactive = domControls.querySelector('.hoo-toggle-unchecked');
+    if (lblInactive) {
+      this._inputStateInactive = lblInactive as HTMLOutputElement;
+      this._inputStateInactive.textContent = labels.labelInactive;
     }
+    LogDebug(lblInactive);
 
-    set checked(value: boolean) {
-        this._inputToggle.checked = value;
+    const lblActive = domControls.querySelector('.hoo-toggle-checked');
+    if (lblInactive) {
+      this._inputStateActive = lblActive as HTMLOutputElement;
+      this._inputStateActive.textContent = labels.labelActive;
     }
+    LogDebug(lblActive);
+    LogDebug(domControls);
 
-    addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLInputElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void {
+    appendTo.append(domControls.body.firstChild as Node);
 
-        this._inputToggle.addEventListener(type, listener, options);
+  }
 
-    };
+  _generateID() {
+    this._ID = 'hoo-toggle-' + Math.floor(Math.random() * 10000);
+  }
 
+  get enabled(): boolean {
+    return !this._inputToggle.disabled;
+  }
 
+  set enabled(value: boolean) {
+    this._inputToggle.disabled = !value;
+  }
+
+  get checked(): boolean {
+    return this._inputToggle.checked;
+  }
+
+  set checked(value: boolean) {
+    this._inputToggle.checked = value;
+  }
+
+  addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLInputElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void {
+
+    this._inputToggle.addEventListener(type, listener, options);
+
+  }
 }
