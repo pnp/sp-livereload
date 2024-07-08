@@ -1,7 +1,7 @@
 {
   "extends": "./node_modules/@microsoft/rush-stack-compiler-4.7/includes/tsconfig-web.json",
   "compilerOptions": {
-    "target": "ES6",
+    "target": "es2019",
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -13,7 +13,6 @@
     "outDir": "lib",
     "inlineSources": false,
     "noImplicitAny": true,
-
     "typeRoots": [
       "./node_modules/@types",
       "./node_modules/@microsoft"
@@ -22,7 +21,7 @@
       "webpack-env"
     ],
     "lib": [
-      "esnext",
+      "es6",
       "dom"
     ]
   },

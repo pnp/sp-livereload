@@ -51,7 +51,7 @@ export default class LiveReloadBar {
     // }
 
     changeConnection = (event: Event): void => {
-        this.setState({ available: this._liveReloaderState.available, connected: this._liveReloaderState.connected } as LiveReloaderState);
+        this.setState({ available: this._liveReloaderState.available, connected: !this._liveReloaderState.connected } as LiveReloaderState);
         this.connectLiveReload();
     }
 
@@ -108,9 +108,6 @@ export default class LiveReloadBar {
         })
         this._domContainer.appendChild(section);
 
-        this._stateAvailable = document.createElement('output') as HTMLOutputElement;
-        section.append(this._stateAvailable);
-
         this._avalibility = new AvailablityState(this._liveReloaderState, section);
 
         this._toggle = new HooToggle({ labelInactive: "Disconnected", labelActive: "Connected" }, section);
@@ -142,8 +139,8 @@ export default class LiveReloadBar {
         this._liveReloaderState.setState(state);
 
         if (this._liveReloaderState.available !== undefined) {
-            this._stateAvailable.textContent = this._liveReloaderState.available === true ? 'Available' : 'N/A';
             this._toggle.enabled = this._liveReloaderState.available;
+            this._avalibility.available = this._liveReloaderState.available;
         }
 
         if (this._liveReloaderState.connected !== undefined) {

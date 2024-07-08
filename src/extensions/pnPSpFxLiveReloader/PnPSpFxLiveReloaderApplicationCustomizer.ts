@@ -43,8 +43,8 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
 
     const connectionResponse = await this._checkConnection();
     // LogDebug('INIT LIVE RELOADER STATE\n\t', this._liveReloaderState, connectionResponse);
-    
-    if (connectionResponse.status === 200) {
+
+    if (connectionResponse && connectionResponse.status === 200) {
       this._liveReloaderState.setState({ available: true, connected: this._liveReloaderState.connected } as LiveReloaderState);
     } else {
       this._liveReloaderState.setState({ available: false, connected: false } as LiveReloaderState);
@@ -87,11 +87,19 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
 
     // LogDebug('Try to fetch live reload connection');
 
-    const liveReloadConnection = await fetch(LIVE_RELOAD_CONNECTION) as Response;
+    try {
 
-    // LogDebug('---- 🚀 LIVE CONNECTION::::', liveReloadConnection, liveReloadConnection.status, liveReloadConnection.statusText);
+      const liveReloadConnection = await fetch(LIVE_RELOAD_CONNECTION) as Response;
 
-    return liveReloadConnection;
+      // LogDebug('---- 🚀 LIVE CONNECTION::::', liveReloadConnection, liveReloadConnection.status, liveReloadConnection.statusText);
+
+      return liveReloadConnection;
+
+    } catch {
+      
+      LogDebug(' Connection not avaliabled ');
+      return null;
+    }
 
   }
 
@@ -135,7 +143,7 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
     }
   }
 
-  private initThemes(){
+  private initThemes() {
     // Consume the new ThemeProvider service
     this._themeProvider = this.context.serviceScope.consume(ThemeProvider.serviceKey);
 
