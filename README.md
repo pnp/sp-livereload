@@ -1,10 +1,11 @@
-# PnPSPFxLiveReloader
+# PnP SPFx Live Reloader
+
+![SPfx Live Reloader Logo](docs/assets/pnp-live-reloader.svg "Refresh and Stay up to date")
 
 ## Summary
 
-Short summary on functionality and used technologies.
+Enables your SharePoint Framework Solutions to automatically refresh the browser window after rebuild.
 
-[picture of the solution in action, if possible]
 
 ## Used SharePoint Framework Version
 
@@ -25,20 +26,26 @@ Short summary on functionality and used technologies.
 
 | Solution    | Author(s)                                               |
 | ----------- | ------------------------------------------------------- |
-| folder name | Author details (name, company, twitter alias with link) |
+| PnP SFPx Livereloader | Stefan Bauer - N8D, [Twitter](https://x.com/stfbauer), [LinkedIn](https://www.linkedin.com/in/stfbauer/) |
 
 ## Version history
 
 | Version | Date             | Comments        |
 | ------- | ---------------- | --------------- |
-| 1.1     | March 10, 2021   | Update comment  |
-| 1.0     | January 29, 2021 | Initial release |
+| 1.0     | July 11, 2024 | Initial release |
 
 ## Disclaimer
 
 **THIS CODE IS PROVIDED _AS IS_ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
 
 ---
+
+## Installation
+
+1. Create a [site collection app catalog](https://learn.microsoft.com/en-us/sharepoint/dev/general-development/site-collection-app-catalog) in your development environment - DO NOT INSTALL GLOABLLY
+2. Update 'PnPSPFxLiveReloader.sppkg' to this app site catalog and install
+3. You will see the following bar at the bottom of your browser window.
+
 
 ## Minimal Path to Awesome
 
@@ -48,21 +55,9 @@ Short summary on functionality and used technologies.
   - **npm install**
   - **gulp serve**
 
-> Include any additional steps as needed.
-
 ## Features
 
-Description of the extension that expands upon high-level summary above.
-
-This extension illustrates the following concepts:
-
-- topic 1
-- topic 2
-- topic 3
-
-> Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
-
-> Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
+For now just reload the Browser Window once the browser have been reloaded.
 
 ## References
 
