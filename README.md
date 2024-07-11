@@ -18,8 +18,6 @@ Enables your SharePoint Framework Solutions to automatically refresh the browser
 - [SharePoint Framework](https://aka.ms/spfx)
 - [Microsoft 365 tenant](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
 
-> Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
-
 ## Prerequisites
 
 None so far.
