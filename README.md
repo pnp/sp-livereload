@@ -11,7 +11,7 @@ Enables your SharePoint Framework Solutions to automatically refresh the browser
 
 ## Used SharePoint Framework Version
 
-![version](https://img.shields.io/badge/version-1.19.0-green.svg)
+![version](https://img.shields.io/badge/SPFx-1.19.0-green.svg)
 
 ## Applies to
 
