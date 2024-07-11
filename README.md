@@ -20,7 +20,7 @@ Enables your SharePoint Framework Solutions to automatically refresh the browser
 
 ## Prerequisites
 
-> Any special pre-requisites?
+None so far.
 
 ## Solution
 
