@@ -2,6 +2,8 @@
 
 ![SPfx Live Reloader Logo](docs/assets/pnp-live-reloader.svg "Refresh and Stay up to date")
 
+Download the [latest version](https://github.com/pnp/sp-livereload/tree/main/installation)
+
 ## Summary
 
 Enables your SharePoint Framework Solutions to automatically refresh the browser window after rebuild.
