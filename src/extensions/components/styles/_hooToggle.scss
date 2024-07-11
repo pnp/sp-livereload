@@ -1,1 +1,5 @@
-@use '../../../../node_modules/@n8d/htwoo-core/lib/sass/01-atoms/input/index';
+@use '../../../../node_modules/@n8d/htwoo-core/lib/sass/01-atoms/input/index' as inputs;
+@use '../../../../node_modules/@n8d/htwoo-core/lib/sass/01-atoms/icons/index' as icons;
+.hoo-toggle{
+    min-width: 9rem;
+}

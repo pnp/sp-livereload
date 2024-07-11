@@ -1,0 +1,12 @@
+.pnp-lr-actions{
+    display: flex;
+    flex-direction: row;
+    .hoo-buttonicon{
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+    .hoo-icon-svg{
+        height: inherit;
+        width: inherit;
+    }
+}

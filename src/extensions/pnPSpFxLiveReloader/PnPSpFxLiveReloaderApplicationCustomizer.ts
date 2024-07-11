@@ -44,9 +44,9 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
     // LogDebug('INIT LIVE RELOADER STATE\n\t', lrs, connectionResponse);
 
     if (connectionResponse && connectionResponse.status === 200) {
-      lrs.state = { available: true, connected: lrs.connected };
+      lrs.state = { available: true, connected: lrs.connected, debugConnected: false };
     } else {
-      lrs.state = { available: false, connected: false };
+      lrs.state = { available: false, connected: false, debugConnected: false };
     }
 
     return Promise.resolve();

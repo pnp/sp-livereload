@@ -16,11 +16,7 @@ export class BrandingInfo {
 
     const fonts = await document.fonts as FontFaceSet;
 
-    console.debug(fonts);
-
     await this.getFonts(fonts);
-
-    console.debug('Registered Font:::: ', this._registeredCustomFonts)
 
   }
 

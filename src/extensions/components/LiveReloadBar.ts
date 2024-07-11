@@ -5,7 +5,9 @@ import { lrs } from '../common/LiveReloaderService';
 import { LogDebug } from '../common/Logger';
 import { AvailabilityState } from './AvailabilityState';
 import { BrandingInfo } from './BrandingInfo';
+import { HooIconButton } from './HooIconButton';
 import { HooToggle } from './HooToggle';
+import { QuickActions } from './QuickActions';
 
 export default class LiveReloadBar {
 
@@ -19,15 +21,20 @@ export default class LiveReloadBar {
     _domContainer = new DocumentFragment();
     _stateAvailable: HTMLOutputElement;
     _stateConnected: HTMLOutputElement;
+    _actionBar: HTMLElement;
+    _debugConnect: HooIconButton;
+    _debugDisconnect: HooIconButton;
     _toggle: HooToggle;
     _availability: AvailabilityState;
 
     changeConnection = (event: Event): void => {
+        // lrs.connected = !lrs.connected
         this.setState();
         this.connectLiveReload();
     }
 
     private connectLiveReload() {
+
         // create a new <script> element
         if (lrs.available) {
 
@@ -60,9 +67,7 @@ export default class LiveReloadBar {
 
     }
 
-    constructor( parentElement: HTMLElement) {
-
-        console.debug('------', lrs, lrs.state);
+    constructor(parentElement: HTMLElement) {
 
         this._parentDom = parentElement;
         this.updateUI(lrs.state);
@@ -70,6 +75,18 @@ export default class LiveReloadBar {
         new BrandingInfo(parentElement);
 
     }
+
+    logo(): Node {
+        const logo = document.createElement('h2');
+        logo.textContent = "PnP Live Reloader";
+        logo.classList.add('pnp-lr-logo');
+
+        return logo;
+    }
+
+    // private buildActionBar(){
+
+    // }
 
     updateUI(state: ILiveReloaderState) {
 
@@ -79,10 +96,29 @@ export default class LiveReloadBar {
         })
         this._domContainer.appendChild(section);
 
+        section.append(this.logo());
+        const actionBar = new QuickActions(section);
+
+        if (lrs.debugConnected) {
+            this._debugConnect = new HooIconButton('icon-plug-connected-filled', { ariaLabel: 'Enter Debug Mode' }, actionBar.Container);
+            this._debugConnect.addEventListener('click', evt => {
+                lrs.debugConnected = false;
+            });
+        }
+        if (!lrs.debugConnected) {
+            this._debugDisconnect = new HooIconButton('icon-plug-disconnected-filled', { ariaLabel: 'Exit Debug Mode' }, actionBar.Container);
+            this._debugDisconnect.addEventListener('click', evt => {
+                lrs.debugConnected = true;
+            });
+        }
+
+        section.append(actionBar.Container);
+
         this._availability = new AvailabilityState(lrs, section);
 
         this._toggle = new HooToggle({ labelInactive: "Disconnected", labelActive: "Connected" }, section);
         this._toggle.addEventListener('click', this.changeConnection);
+        this._toggle.enabled = lrs.connected;
 
         this.setState();
 
@@ -103,22 +139,15 @@ export default class LiveReloadBar {
 
     setState() {
 
-        console.debug(lrs.state);
-
         if (lrs.available !== undefined) {
             this._toggle.enabled = lrs.available;
             this._availability.available = lrs.available;
         }
 
         if (lrs.connected !== undefined) {
+            lrs.connected = !lrs.connected
             this._toggle.checked = lrs.connected;
         }
-
-        // // lrs.setState(state);
-        // if (callback) {
-
-        //     callback();
-        // }
 
     }
 

@@ -5,6 +5,11 @@
     flex-direction: row;
     align-items: center;
     gap: 0.25rem;
+    align-self: flex-end center;
+}
+
+.status-label {
+    white-space: nowrap;
 }
 
 .status-indicator {
