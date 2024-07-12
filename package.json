@@ -1,6 +1,6 @@
 {
-  "name": "PnPSPFxLiveReloader",
-  "version": "2.0.0",
+  "name": "pnp-spfx-live-reloader",
+  "version": "1.0.0",
   "private": true,
   "engines": {
     "node": ">=18.17.1 <19.0.0"
