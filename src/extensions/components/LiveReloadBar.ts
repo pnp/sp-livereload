@@ -1,10 +1,12 @@
 /* eslint-disable no-new */
+import { IClientSideComponentManifest } from '@microsoft/sp-module-interfaces';
 import { ILiveReloaderMessage } from '../common/ILiveReloaderMessage';
 import { ILiveReloaderState } from '../common/ILiveReloaderState';
 import { lrs } from '../common/LiveReloaderService';
 import { LogDebug } from '../common/Logger';
 import { AvailabilityState } from './AvailabilityState';
 import { BrandingInfo } from './BrandingInfo';
+import { Credits } from './Credits';
 import { HooIconButton } from './HooIconButton';
 import { HooToggle } from './HooToggle';
 import { QuickActions } from './QuickActions';
@@ -15,12 +17,14 @@ export default class LiveReloadBar {
     _LIVE_RELOADER_SOCKET = "https://localhost:35729/livereload.js?snipver=1";
     _LIVE_RELOADER_SOCKET_ALERT = "https://localhost:35729/changed";
 
+    _mainfest: IClientSideComponentManifest;
     _connection: WebSocket;
 
     _parentDom: HTMLElement;
     _domContainer = new DocumentFragment();
     _stateAvailable: HTMLOutputElement;
     _stateConnected: HTMLOutputElement;
+    _credits: Credits;
     _actionBar: HTMLElement;
     _debugConnect: HooIconButton;
     _debugDisconnect: HooIconButton;
@@ -67,9 +71,10 @@ export default class LiveReloadBar {
 
     }
 
-    constructor(parentElement: HTMLElement) {
+    constructor(parentElement: HTMLElement, manifest: IClientSideComponentManifest) {
 
         this._parentDom = parentElement;
+        this._mainfest = manifest;
         this.updateUI(lrs.state);
         this.connectLiveReload();
         new BrandingInfo(parentElement);
@@ -119,6 +124,28 @@ export default class LiveReloadBar {
         this._toggle = new HooToggle({ labelInactive: "Disconnected", labelActive: "Connected" }, section);
         this._toggle.addEventListener('click', this.changeConnection);
         this._toggle.enabled = lrs.connected;
+
+        const creditsButton = new HooIconButton('icon-info-filled', { ariaLabel: 'Credits' }, section);
+
+        this._credits = new Credits(this._mainfest);
+        this._parentDom.prepend(this._credits.credits);
+
+        creditsButton.addEventListener('click', () => {
+
+            console.debug(this._credits.credits, this._credits.credits.hasAttribute('open'));
+
+            if (this._credits.credits.hasAttribute('open')) {
+            
+                this._credits.credits.close();
+            
+            } else {
+            
+                this._credits.credits.show();
+            
+            }
+
+        })
+
 
         this.setState();
 

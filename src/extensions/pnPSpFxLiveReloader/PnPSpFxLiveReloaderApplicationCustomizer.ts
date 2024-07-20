@@ -131,7 +131,7 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
           this._bottomPlaceholder.domElement.setAttribute('style', this._styles.cssText);
           this._bottomPlaceholder.domElement.classList.add(styles.pnpLiveReloader);
 
-          this._liveReloaderBar = new LiveReloadBar(this._bottomPlaceholder.domElement);
+          this._liveReloaderBar = new LiveReloadBar(this._bottomPlaceholder.domElement, this.context.manifest);
 
           this._liveReloaderBar.setState();
 

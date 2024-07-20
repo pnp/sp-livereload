@@ -11,6 +11,18 @@
     "clean": "gulp clean",
     "test": "gulp test"
   },
+  "homepage": "https://github.com/pnp/sp-livereload",
+  "issues":   "https://github.com/pnp/sp-livereload/issues",
+  "author": "https://github.com/pnp/sp-livereload/graphs/contributors",
+  "maintainers": [
+    {
+      "name": "Stefan Bauer",
+      "email": "stefan.bauer@n8d.at",
+      "web": "https://n8d.at/",
+      "url": "https://github.com/stfbauer"
+    }
+  ],
+  "contributors": [],
   "dependencies": {
     "@microsoft/decorators": "1.19.0",
     "@microsoft/sp-application-base": "1.19.0",
