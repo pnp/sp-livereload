@@ -8,6 +8,26 @@ Download the [latest version](https://github.com/pnp/sp-livereload/tree/main/ins
 
 Enables your SharePoint Framework Solutions to automatically refresh the browser window after rebuild.
 
+## FAQ
+
+### How is it different from spfx-fast-serve?
+
+PnP SPFx live reloader supports projects from SPFx (SharePoint Framework) Version 1.0 onwards. After a successful build, SharePoint will automatically reload the updated code using a built-in mechanism.
+
+spfx-fast-serve, on the other hand, requires Microsoft-unsupported manipulation of the SPFx build chain. 
+
+### Are there any additional requirements?
+
+The PnP SPFx Live Reloader is a custom application customiser that can be connected to any SPFx project with **zero configuration effort** for your current and upcoming projects.
+
+### Will this make SharePoint Framework development faster?
+
+Many factors of your system configuration and hardware influence the performance of the SharePoint Framework build chain. To make something faster or slower is always highly subjective.
+
+However, PnP SPFx Live Reloader gives you a smoother development experience by not having to reload the browser manually and look for the SharePoint Framework build chain to complete all its tasks.
+
+You can focus on your code rather than when it is time to reload your browser.
+
 
 ## Used SharePoint Framework Version
 
