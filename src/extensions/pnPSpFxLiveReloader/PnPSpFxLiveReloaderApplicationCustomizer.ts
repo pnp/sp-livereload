@@ -12,6 +12,7 @@ import styles from './PnPSpFxLiveReloaderApplicationCustomizer.module.scss';
 
 import {
   IReadonlyTheme,
+  ThemeChangedEventArgs,
   ThemeProvider
 } from '@microsoft/sp-component-base';
 
@@ -95,7 +96,7 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
       return liveReloadConnection;
 
     } catch {
-      
+
       LogDebug(' Connection not available ');
       return null;
     }
@@ -180,7 +181,32 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
 
     }
 
+    this._themeProvider.themeChangedEvent.add(this,  this.onThemeChanged);
+
     return Promise.resolve();
+
+  }
+
+  private onThemeChanged(args: ThemeChangedEventArgs): void {
+
+
+    console.debug(args);
+
+    if (!args) {
+      return;
+    }
+
+    if (args.theme) {
+
+      this.setCSSVariables(args.theme.semanticColors);
+      this.setCSSVariables(args.theme.palette);
+
+      if(this._bottomPlaceholder){
+        this._bottomPlaceholder.domElement.setAttribute('style', this._styles.cssText);
+      }
+
+
+    }
 
   }
 

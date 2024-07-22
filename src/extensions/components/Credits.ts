@@ -50,8 +50,7 @@ export class Credits {
         const maintainerMenu = document.createElement('menu');
         maintainerMenu.classList.add("pnp-lr-authors");
 
-        const maintainers = pkg.maintainer;
-
+        const maintainers = pkg.maintainers;
 
         for (const index in maintainers) {
                 
@@ -69,9 +68,7 @@ export class Credits {
 
         maintainer.append(maintainerMenu);
 
-
         return maintainer;
-
 
     }
 

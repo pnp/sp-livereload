@@ -57,7 +57,7 @@ export default class LiveReloadBar {
                         if (lrs.state.connected && msgCommand.command && msgCommand.command === 'reload') {
                             window.location.reload();
                         }
-                        LogDebug('MESSAGE COMMAND::::', msgCommand);
+                        LogDebug('MESSAGE COMMAND ::::', msgCommand);
                     }
                     LogDebug('Web Socket Event ::: Message', event)
                 })
@@ -125,7 +125,12 @@ export default class LiveReloadBar {
         this._toggle.addEventListener('click', this.changeConnection);
         this._toggle.enabled = lrs.connected;
 
-        const creditsButton = new HooIconButton('icon-info-filled', { ariaLabel: 'Credits' }, section);
+
+        const lrActionCredit = document.createElement('div');
+        lrActionCredit.classList.add('pnp-lr-actions');
+        section.append(lrActionCredit);
+
+        const creditsButton = new HooIconButton('icon-info-filled', { ariaLabel: 'Credits' }, lrActionCredit);
 
         this._credits = new Credits(this._mainfest);
         this._parentDom.prepend(this._credits.credits);

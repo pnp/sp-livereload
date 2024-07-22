@@ -3,8 +3,8 @@
 .pnp-logo-graph {
     width: clamp(200px, 15vw, 600px);
     height: auto;
-    background: var(dt.$neutral-000);
-    background: radial-gradient(circle, rgba(dt.$neutral-000, 0.8) 40%, rgba(dt.$neutral-000, 0) 100%);
+    background: dt.$neutral-000;
+    background: radial-gradient(circle, rgba(#{dt.$neutral-000}, 0.8) 40%, rgba(#{dt.$neutral-000}, 0) 100%);
     border-radius: 2rem;
     padding: 1rem 1.25rem;
     box-sizing: border-box;

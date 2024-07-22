@@ -4,14 +4,14 @@
     bottom: 3rem;
     width: 100%;
     box-sizing: border-box;
-    background-color: rgb(255, 255, 255, 0.7);
+    background-color: rgb(dt.$neutral-000, 0.7);
+    color: dt.$neutral-900;
     backdrop-filter: blur(20px) saturate(150%);
-    border-width: 2px 1px 1px 1px;
-    border-color: dt.$theme-600;
+    border-width: 2px 1px 0px 1px;
+    border-color: dt.$neutral-200 dt.$neutral-000;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     z-index: 1000;
-
     h2 {
         color: dt.$theme-600;
         margin: 0;
