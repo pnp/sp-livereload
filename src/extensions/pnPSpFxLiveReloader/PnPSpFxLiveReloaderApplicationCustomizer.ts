@@ -189,9 +189,6 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
 
   private onThemeChanged(args: ThemeChangedEventArgs): void {
 
-
-    console.debug(args);
-
     if (!args) {
       return;
     }

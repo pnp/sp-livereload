@@ -35,7 +35,7 @@ class IconService {
             if (iconsRsponse) {
 
                 const iconsContent = await iconsRsponse.text();
-                console.debug('loading icons');
+
                 if (iconsContent) {
 
                     this.svgIcons = domParser.parseFromString(iconsContent, "image/svg+xml");
@@ -44,57 +44,12 @@ class IconService {
 
                     allSymbols.forEach(symbol => {
 
-                        console.debug(symbol.id, symbol.getAttribute('viewBox'))
-
                         const icon: Icon = {
                             name: symbol.id,
                             path: symbol.innerHTML,
                             viewBox: symbol.getAttribute('viewBox'),
                             type: symbol.dataset.icontype
                         }
-
-
-                        // console.debug(symbol.getRootNode(), assetFolder)
-                        // const xrefs = symbol.firstElementChild?.getElementsByTagNameNS('http://www.w3.org/2000/svg', 'image');
-
-                        // if (xrefs && xrefs.length !== 0) {
-
-                        //     console.debug('XREF:::', xrefs, assetFolder);
-
-                        //     for (let i = 0; i < xrefs.length; i++) {
-
-                        //         let currenXRef = xrefs[i] as SVGImageElement;
-
-                        //         debugger;                                
-                        //         try {
-                        //             console.debug('--- ENTER');
-                        //             Object.assign({
-                        //                 href: {
-                        //                     animVal: '../assets/pnp-live-reloader-1.png',
-                        //                     baseVal: '../assets/pnp-live-reloader-1.png'
-                        //                 }
-                        //             }, currenXRef);
-                        //             console.debug('--- EXIT');
-                        //         } catch (error) {
-
-                        //             console.debug(error);
-
-                        //         }
-                        //         // currenXRef.href.animVal = require(assetFolder+'/'+currenXRef.href);
-                        //         // Object.assign({
-                        //         //     "href":{
-                        //         //         "animVal": 
-                        //         //     }
-                        //         // })
-                        //         console.debug('XLLLLLLLL---- ', currenXRef);
-
-                        //     };
-
-                        // }
-
-                        // } catch (e) {
-                        //     console.debug('Nothing found', e)
-                        // }
 
                         this.icons.push(icon);
                         this.allIconNames.push(symbol.id);

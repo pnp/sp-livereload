@@ -90,9 +90,6 @@ export default class LiveReloadBar {
     }
 
     private showBrandingInformation = (event: MouseEvent) =>{
-         console.debug(event);
-
-         console.debug(this._branding.Info);
 
          if(!this._branding.Info.hasAttribute('open')){
             this._branding.Info.show();

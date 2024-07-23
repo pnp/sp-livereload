@@ -70,16 +70,13 @@ export class Branding {
 
         const curFont = this._registeredCustomFonts[i];
 
-        console.debug(curFont);
-
         const fontMenuItem = document.createElement('li');
         fontMenuItem.textContent = curFont.family;
         fontMenuItem.style.fontFamily = curFont.family;
 
         fontMenu.append(fontMenuItem);
 
-        const compStyles = window.getComputedStyle(fontMenuItem);
-        console.debug('FONT FEATURE SETTINGS:::::', compStyles.fontWeight);
+        // const compStyles = window.getComputedStyle(fontMenuItem);
 
       }
 
@@ -118,11 +115,6 @@ export class Branding {
     const themeColors = ThemeColors.theme;
     const themeColorKeys: string[] = Object.keys(themeColors);
 
-    console.debug('Theme Color Keys', themeColorKeys);
-    // const keys = Object.keys(ThemeColors.theme);
-
-    console.debug(ThemeColors.theme, ThemeColors.neutrals);
-
     const themeColorMenu = document.createElement('menu');
     themeColorMenu.classList.add('theme-colors');
     const colorIds: string[] = [];
@@ -141,7 +133,7 @@ export class Branding {
       menuItemButton.innerHTML = `<span class='visually-hidden'>${themeColors[item].name}</span>`;
       menuItemButton.ariaLabel = `${themeColors[item].name} - Click for more details`;
       menuItemButton.addEventListener('click', this.showColorInformation);
-    
+
       themeColorMenu.append(menuItem);
 
     })

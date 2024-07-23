@@ -31,14 +31,9 @@ export class Dialog extends HTMLDialogElement {
                     <div class="dlg-content"></div>
                         </div>`;
 
-
-        console.debug(this.outerHTML);
-
         this._content = this.querySelector('.dlg-content') as HTMLElement;
         this._header = this.querySelector('.dlg-header') as HTMLElement;
         this._header.append(this._closeButton.Button);
-
-        console.debug(this._content);
 
     }
 
