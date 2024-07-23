@@ -6,7 +6,8 @@ const ICON_FILE_PATH = require('../assets/icons.svg');
 //                         </svg>`
 const TEMPLATE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" class="hoo-icon-svg" viewBox="0 0 32 32" aria-hidden="true">
                         <title>{{ title }}</title>
-                        </svg>`
+                        </svg>`;
+// const assetFolder = '../assets/';
 
 const domParser = new DOMParser();
 
@@ -14,7 +15,7 @@ interface Icon {
     name: string;
     path: string;
     // eslint-disable-next-line
-    viewBox?: string | null;
+    viewBox?: string | null;
     type?: string | undefined
 }
 
@@ -66,7 +67,7 @@ class IconService {
     }
 
 
-    public getSVG(v: string, svgTitle?: string) {
+    public getSVG(v: string, svgTitle?: string, classNames?: string) {
 
         if (this.allIconNames.indexOf(v) !== -1) {
 
@@ -93,18 +94,27 @@ class IconService {
                         svgIcon.append(path.documentElement)
 
                     }
+                    if(curIcon.viewBox){
 
-                    if(svgTitle){
+                        svgIcon.setAttribute('viewBox', curIcon.viewBox)
+
+                    }
+
+                    if (svgTitle) {
 
                         const elemTitle = svgIcon.querySelector('title');
 
-                        if(elemTitle){
+                        if (elemTitle) {
                             elemTitle.textContent = svgTitle;
                         }
-                        
+
                     } else {
                         const elemTitle = svgIcon.querySelector('title');
                         elemTitle?.remove();
+                    }
+
+                    if(classNames){
+                        svgIcon.classList.add(classNames);
                     }
 
                     return svgIcon;
@@ -126,4 +136,4 @@ class IconService {
 const _icons = new IconService();
 await _icons._loadIcons();
 
-export const icons = _icons;
+export const Icons = _icons;

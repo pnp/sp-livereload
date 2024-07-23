@@ -1,0 +1,105 @@
+@use '../../../../node_modules/@n8d/htwoo-core/lib/sass/00-base/colors/colors' as dt;
+
+.pnp-logo-graph {
+    width: clamp(200px, 15vw, 600px);
+    height: auto;
+    background: dt.$neutral-000;
+    background: radial-gradient(circle, rgba(#{dt.$neutral-000}, 0.8) 40%, rgba(#{dt.$neutral-000}, 0) 100%);
+    border-radius: 2rem;
+    padding: 1rem 1.25rem;
+    box-sizing: border-box;
+}
+
+.pnp-lr-credits {
+    h3 {
+        margin-top: 0.25em;
+        margin-bottom: 0.35em;
+    }
+
+    .dlg-inner {
+        display: grid;
+        grid-template-rows: header 2rem content 1fr;
+    }
+
+    .dlg-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        @media screen and (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    a,
+    .pnp-lr-link {
+        color: dt.$theme-800;
+
+        display: inline-block;
+        padding-left: 0.25em;
+
+        &:visited {
+            color: dt.$theme-800;
+        }
+
+        &:hover {
+            color: dt.$theme-600;
+        }
+    }
+
+}
+
+.pnp-lr-author {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.125em;
+    gap: .5em;
+
+    .hoo-buttonicon {
+        color: dt.$theme-600;
+        border-radius: 0.25rem;
+        transition: all 0.125s cubic-bezier(0.215, 0.610, 0.355, 1);
+
+        &:hover {
+            color: dt.$neutral-600;
+            background-color: dt.$theme-300;
+        }
+    }
+}
+
+.pnp-lr-projectinfo {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+.pnp-lr-authors,
+.menu-credit {
+    list-style: none;
+    margin-top: 0;
+    padding-left: 0;
+}
+
+.menu-credit-item {
+    margin-block: 0.5rem;
+    margin-left: 0;
+
+    .menu-credit {
+        padding-left: 0.25rem;
+
+        .menu-credit-item {
+            margin-block: 0.25rem;
+
+            a {
+                display: flex;
+                align-items: flex-start;
+                gap: 0.25rem;
+                text-decoration: none;
+            }
+        }
+
+    }
+}

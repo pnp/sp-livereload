@@ -1,0 +1,66 @@
+@use '../../../../node_modules/@n8d/htwoo-core/lib/sass/00-base/colors/colors' as dt;
+
+
+.visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.pnp-lr-brandinfo {
+    .dlg-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+
+        @media screen and (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.pnp-lr-fonts {
+}
+
+.theme-colors {
+
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 0.25rem;
+    border-radius: 0.75rem;
+    border: 1px dt.$black solid;
+    padding: 0.5rem;
+    background-color: dt.$white;
+    list-style: none;
+
+    li {
+        padding: 0.125rem;
+        transition: all 125ms ease-in-out;
+
+        &:focus-within {
+            border-radius: 0.5rem;
+            filter: drop-shadow(2px 2px 0 dt.$neutral-600);
+        }
+    }
+}
+
+.color-swatch {
+    content: "";
+    display: block;
+    width: clamp(1.5rem, 2vw, 3rem);
+    height: clamp(1.5rem, 2vw, 3rem);
+    border-radius: 0.5rem;
+}
+
+.color-swatch-output {
+    width: 100%;
+    margin-top: 1rem;
+    flex-grow: 0;
+}

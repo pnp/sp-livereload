@@ -1,4 +1,4 @@
-import { icons } from "../common/IconService";
+import { Icons } from "../common/IconService";
 
 const domParser = new DOMParser();
 
@@ -9,7 +9,7 @@ interface IHooIconButtonProps {
 
 export class HooIconButton {
 
-    _iconButton: HTMLButtonElement;
+    private _iconButton: HTMLButtonElement;
 
     constructor(iconName: string, props?: IHooIconButtonProps, parentElement?: HTMLElement) {
 
@@ -19,7 +19,11 @@ export class HooIconButton {
             `, 'text/html');
 
         this._iconButton = doc.querySelector('.hoo-buttonicon') as HTMLButtonElement;
-        const currentIcon = icons.getSVG(iconName);
+
+        if(props?.ariaLabel){
+            this._iconButton.ariaLabel = props.ariaLabel;
+        }
+        const currentIcon = Icons.getSVG(iconName);
 
         if (currentIcon) {
             if (props && props.ariaLabel) {

@@ -7,9 +7,12 @@
     border-top: 1px black solid;
 
     :global {
-        @include meta.load-css('../components/styles/LiveReloadBar');
         @include meta.load-css('../components/styles/hooIconButton');
         @include meta.load-css('../components/styles/hooToggle');
+        @include meta.load-css('../components/styles/LiveReloadBar');
+        @include meta.load-css('../components/styles/Dialog');
+        @include meta.load-css('../components/styles/Credits');
+        @include meta.load-css('../components/styles/brandInfo');
         @include meta.load-css('../components/styles/AvailabityState');
         @include meta.load-css('../components/styles/QuickActions');
     }

@@ -1,0 +1,25 @@
+@use '../../../../node_modules/@n8d/htwoo-core/lib/sass/00-base/colors/colors' as dt;
+
+.dlg {
+    bottom: 3rem;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(dt.$neutral-000, 0.95);
+    color: dt.$neutral-900;
+    backdrop-filter: blur(20px) saturate(150%) contrast(100%);
+    border-width: 2px 1px 0px 1px;
+    border-color: dt.$neutral-200 dt.$neutral-000;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    z-index: 1000;
+    h2 {
+        color: dt.$theme-600;
+        margin: 0;
+    }
+}
+.dlg-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
