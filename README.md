@@ -65,9 +65,10 @@ For details look at the [CHANGELOG](CHANGELOG.md)
 
 ## Installation
 
+1. Download the [latest release](https://github.com/pnp/sp-livereload/releases)
 1. Create a [site collection app catalog](https://learn.microsoft.com/en-us/sharepoint/dev/general-development/site-collection-app-catalog) in your development environment - DO NOT INSTALL GLOABLLY
-2. Update 'PnPSPFxLiveReloader.sppkg' to this app site catalog and install
-3. You will see the following bar at the bottom of your browser window.
+1. Add 'PnPSPFxLiveReloader.sppkg' to this app site catalog and install
+1. You will see the following bar at the bottom of your browser window.
 
 
 ## Minimal Path to Awesome
