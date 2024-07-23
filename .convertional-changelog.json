@@ -1,0 +1,39 @@
+{
+    "header": "# PnP SPFx Live Reloader - Changelog\n",
+    "types": [
+      {
+        "type": "feat",
+        "section": "Features"
+      },
+      {
+        "type": "fix",
+        "section": "Bug Fixes"
+      },
+      {
+        "type": "chore",
+        "hidden": true
+      },
+      {
+        "type": "docs",
+        "hidden": true
+      },
+      {
+        "type": "style",
+        "hidden": true
+      },
+      {
+        "type": "refactor",
+        "section": "Refactoring"
+      },
+      {
+        "type": "perf",
+        "hidden": true
+      },
+      {
+        "type": "test",
+        "hidden": true
+      }
+    ],
+    "commitUrlFormat": "https://github.com/pnp/sp-livereload/commit/{{hash}}",
+    "compareUrlFormat": "https://github.com/pnp/sp-livereload/commit/{{hash}}"
+  }
