@@ -46,13 +46,16 @@ None so far.
 
 | Solution    | Author(s)                                               |
 | ----------- | ------------------------------------------------------- |
-| PnP SFPx Livereloader | Stefan Bauer - N8D, [Twitter](https://x.com/stfbauer), [LinkedIn](https://www.linkedin.com/in/stfbauer/) |
+| PnP SFPx Live Reloader | Stefan Bauer - N8D, [Twitter](https://x.com/stfbauer), [LinkedIn](https://www.linkedin.com/in/stfbauer/) |
 
 ## Version history
 
 | Version | Date             | Comments        |
 | ------- | ---------------- | --------------- |
+| 1.1     | July 23, 2024 | Credits and Branding Information added |
 | 1.0     | July 11, 2024 | Initial release |
+
+For details look at the [CHANGELOG](CHANGELOG.md)
 
 ## Disclaimer
 
