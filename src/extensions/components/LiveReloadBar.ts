@@ -5,7 +5,7 @@ import { ILiveReloaderState } from '../common/ILiveReloaderState';
 import { lrs } from '../common/LiveReloaderService';
 import { LogDebug } from '../common/Logger';
 import { AvailabilityState } from './AvailabilityState';
-import { BrandingInfo } from './BrandingInfo';
+import { Branding } from './BrandingInfo';
 import { Credits } from './Credits';
 import { HooIconButton } from './HooIconButton';
 import { HooToggle } from './HooToggle';
@@ -25,6 +25,7 @@ export default class LiveReloadBar {
     _stateAvailable: HTMLOutputElement;
     _stateConnected: HTMLOutputElement;
     _credits: Credits;
+    _branding: Branding;
     _actionBar: HTMLElement;
     _debugConnect: HooIconButton;
     _debugDisconnect: HooIconButton;
@@ -77,7 +78,6 @@ export default class LiveReloadBar {
         this._mainfest = manifest;
         this.updateUI(lrs.state);
         this.connectLiveReload();
-        new BrandingInfo(parentElement);
 
     }
 
@@ -89,9 +89,17 @@ export default class LiveReloadBar {
         return logo;
     }
 
-    // private buildActionBar(){
+    private showBrandingInformation = (event: MouseEvent) =>{
+         console.debug(event);
 
-    // }
+         console.debug(this._branding.Info);
+
+         if(!this._branding.Info.hasAttribute('open')){
+            this._branding.Info.show();
+         } else {
+            this._branding.Info.close();
+         }
+    }
 
     updateUI(state: ILiveReloaderState) {
 
@@ -103,6 +111,12 @@ export default class LiveReloadBar {
 
         section.append(this.logo());
         const actionBar = new QuickActions(section);
+
+        const brandingInfo = new HooIconButton('icon-paint-bucket-filled', { ariaLabel: 'Show Branding and Design Information' }, actionBar.Container);
+        brandingInfo.addEventListener('click', this.showBrandingInformation);
+
+        this._branding = new Branding();
+        this._parentDom.prepend(this._branding.Info);
 
         if (lrs.debugConnected) {
             this._debugConnect = new HooIconButton('icon-plug-connected-filled', { ariaLabel: 'Enter Debug Mode' }, actionBar.Container);
@@ -121,7 +135,7 @@ export default class LiveReloadBar {
 
         this._availability = new AvailabilityState(lrs, section);
 
-        this._toggle = new HooToggle({ labelInactive: "Disconnected", labelActive: "Connected" }, section);
+        this._toggle = new HooToggle({ labelInactive: "Disconnected", labelActive: "Connected" }, section, { tabIndex: -1 });
         this._toggle.addEventListener('click', this.changeConnection);
         this._toggle.enabled = lrs.connected;
 
@@ -130,7 +144,7 @@ export default class LiveReloadBar {
         lrActionCredit.classList.add('pnp-lr-actions');
         section.append(lrActionCredit);
 
-        const creditsButton = new HooIconButton('icon-info-filled', { ariaLabel: 'Credits' }, lrActionCredit);
+        const creditsButton = new HooIconButton('icon-info-filled', { ariaLabel: 'Show / Hide Credits' }, lrActionCredit);
 
         this._credits = new Credits(this._mainfest);
         this._parentDom.prepend(this._credits.credits);

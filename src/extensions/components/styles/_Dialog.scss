@@ -4,9 +4,9 @@
     bottom: 3rem;
     width: 100%;
     box-sizing: border-box;
-    background-color: rgb(dt.$neutral-000, 0.7);
+    background-color: rgb(dt.$neutral-000, 0.95);
     color: dt.$neutral-900;
-    backdrop-filter: blur(20px) saturate(150%);
+    backdrop-filter: blur(20px) saturate(150%) contrast(100%);
     border-width: 2px 1px 0px 1px;
     border-color: dt.$neutral-200 dt.$neutral-000;
     border-top-left-radius: 0.5rem;

@@ -8,6 +8,15 @@ import { Icons } from "../common/IconService";
 import { Dialog } from "./Dialog";
 import { HooIconButton } from "./HooIconButton";
 
+const thirdPartyLibs = [{
+    "name": "hTWOo Core",
+    "url": "https://lab.n8d.studio/htwoo/"
+}, {
+    "name": "hTWOo Icons",
+    "url": "https://lab.n8d.studio/htwoo/htwoo-core/patterns/design-tokens-icon-overview/design-tokens-icon-overview.rendered.html"
+}
+]
+
 export class Credits {
 
     private _dialog: Dialog;
@@ -26,9 +35,6 @@ export class Credits {
 
         this._dialogContent.append(this.generateMaintainer());
         this._dialogContent.append(this.generateProjectCore());
-
-        console.debug(pkg);
-
 
         if (this._dialogContent.hasChildNodes()) {
 
@@ -53,16 +59,16 @@ export class Credits {
         const maintainers = pkg.maintainers;
 
         for (const index in maintainers) {
-                
-                const curMaintainer = pkg.maintainers[index];
 
-                const menuItem = document.createElement('li');
-                menuItem.classList.add('pnp-lr-author');
+            const curMaintainer = pkg.maintainers[index];
 
-                menuItem.innerHTML = `<a href='${curMaintainer.url}' class="pnp-lr-link">${curMaintainer.name}</a>`
-                const iconGithub = new HooIconButton('icon-github', { ariaLabel: `Visit ${curMaintainer.name}` }, menuItem)
-                console.debug(iconGithub);
-                maintainerMenu.append(menuItem);
+            const menuItem = document.createElement('li');
+            menuItem.classList.add('pnp-lr-author');
+
+            menuItem.innerHTML = `<a href='${curMaintainer.url}' class="pnp-lr-link">${curMaintainer.name}</a>`
+            const iconGithub = new HooIconButton('icon-github', { ariaLabel: `Visit ${curMaintainer.name}` }, menuItem)
+            console.debug(iconGithub);
+            maintainerMenu.append(menuItem);
 
         }
 
@@ -127,6 +133,35 @@ export class Credits {
         menu.append(menuItemIssues);
 
         coreProjectInfo.append(menu);
+
+        const thirdPartyElement = document.createElement('section');
+        thirdPartyElement.innerHTML = "<h3>3rd Party Libraries used:</h3>";
+
+        const thirdPartyLinks = document.createElement('div');
+
+        thirdPartyLibs.forEach( (library, index) => {
+
+            const link = document.createElement('a');
+            link.href = library.url;
+            link.textContent = library.name;
+            link.target = '_blank';
+
+            if(index < thirdPartyLibs.length - 1){
+
+                thirdPartyLinks.append(link);
+                thirdPartyLinks.append(', ');
+            
+            } else {
+            
+                thirdPartyLinks.append(link)
+            
+            }
+            
+        })
+
+        thirdPartyElement.append(thirdPartyLinks);
+
+        coreProjectInfo.append(thirdPartyElement);
 
         return coreProjectInfo;
 

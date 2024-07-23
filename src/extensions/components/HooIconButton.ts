@@ -19,6 +19,10 @@ export class HooIconButton {
             `, 'text/html');
 
         this._iconButton = doc.querySelector('.hoo-buttonicon') as HTMLButtonElement;
+
+        if(props?.ariaLabel){
+            this._iconButton.ariaLabel = props.ariaLabel;
+        }
         const currentIcon = Icons.getSVG(iconName);
 
         if (currentIcon) {

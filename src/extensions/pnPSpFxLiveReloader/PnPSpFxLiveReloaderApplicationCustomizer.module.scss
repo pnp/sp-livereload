@@ -12,6 +12,7 @@
         @include meta.load-css('../components/styles/LiveReloadBar');
         @include meta.load-css('../components/styles/Dialog');
         @include meta.load-css('../components/styles/Credits');
+        @include meta.load-css('../components/styles/brandInfo');
         @include meta.load-css('../components/styles/AvailabityState');
         @include meta.load-css('../components/styles/QuickActions');
     }

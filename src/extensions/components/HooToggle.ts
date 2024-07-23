@@ -5,6 +5,10 @@ export interface IHooToggle {
   labelInactive: string,
 }
 
+export interface IToggleProps {
+  tabIndex: number
+}
+
 export class HooToggle {
 
   _ID: string;
@@ -14,7 +18,7 @@ export class HooToggle {
   _inputStateActive: HTMLOutputElement;
   _inputStateInactive: HTMLOutputElement;
 
-  constructor(labels: IHooToggle, appendTo: HTMLElement) {
+  constructor(labels: IHooToggle, appendTo: HTMLElement, props?: IToggleProps) {
 
     if (!appendTo) {
       throw new Error("I don't know where to append it to the DOM");
@@ -32,7 +36,12 @@ export class HooToggle {
             </label>
         </div>`, "text/html");
 
-    const input = domControls.querySelector('.hoo-toggle-cb');
+    const input: HTMLInputElement | null = domControls.querySelector('.hoo-toggle-cb');
+
+    if(input && props?.tabIndex){
+      input.tabIndex = props.tabIndex;
+    }
+
     if (input) {
       this._inputToggle = input as HTMLInputElement;
       this._inputToggle.id = this._ID;
