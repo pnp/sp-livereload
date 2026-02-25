@@ -273,6 +273,9 @@ export default class LiveReloadBar {
         this._isModernMode = this.isVersion122OrHigher(version);
         lrs.modernMode = this._isModernMode;
 
+        // Update credits panel with the runtime-detected version
+        this._credits.updateSPFxVersion(version);
+
         console.log('🔥 detectAndInitialize: SPFx version=', version, 'modernMode=', this._isModernMode);
 
         if (this._isModernMode) {
@@ -443,25 +446,15 @@ export default class LiveReloadBar {
         this._branding = new Branding();
         this._parentDom.prepend(this._branding.Info);
 
-        // Check if webpack HMR is available (indicates SPFx 1.22+ modern mode)
-        // This is available immediately, unlike the async version detection
-        const hasWebpackHMR = Object.keys(window).some(k => k.startsWith('webpackHotUpdate'));
-
-        // In modern mode (1.22+), always show connected plug since HMR is always active
-        // In legacy mode, show based on debugConnected state
-        const showConnectedPlug = hasWebpackHMR || lrs.debugConnected;
-
-        if (showConnectedPlug) {
-            this._debugConnect = new HooIconButton('icon-plug-connected-filled', { ariaLabel: 'HMR Connected' }, actionBar.Container);
-            if (!hasWebpackHMR) {
-                // Only allow toggling in legacy mode
-                this._debugConnect.addEventListener('click', _evt => {
-                    lrs.debugConnected = false;
-                });
-            }
-        }
-        if (!showConnectedPlug) {
-            this._debugDisconnect = new HooIconButton('icon-plug-disconnected-filled', { ariaLabel: 'HMR Disconnected' }, actionBar.Container);
+        // Show plug icon based on debugConnected state
+        // Toggles the debug manifest URL (?debug=true&noredir=true&debugManifestsFile=...)
+        if (lrs.debugConnected) {
+            this._debugConnect = new HooIconButton('icon-plug-connected-filled', { ariaLabel: 'Debug Connected' }, actionBar.Container);
+            this._debugConnect.addEventListener('click', _evt => {
+                lrs.debugConnected = false;
+            });
+        } else {
+            this._debugDisconnect = new HooIconButton('icon-plug-disconnected-filled', { ariaLabel: 'Debug Disconnected' }, actionBar.Container);
             this._debugDisconnect.addEventListener('click', _evt => {
                 lrs.debugConnected = true;
             });

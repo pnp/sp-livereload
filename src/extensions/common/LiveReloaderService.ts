@@ -1,7 +1,7 @@
 import { ILiveReloaderSession, ILiveReloaderState } from "./ILiveReloaderState";
 
 const SESSION_STORAGE_KEY = "pnp-live-reloader";
-const SESSION_DEBUG_CONNECTED = "spfx-debug";
+const SESSION_DEBUG_CONNECTED = "pnp-lr-debug";
 const PLACEMENT_STORAGE_KEY = "pnp-live-reloader-placement";
 // SPFx v1.21+ uses /temp/build/manifests.js
 const DEBUG_QUERY_STRING = "?debug=true&noredir=true&debugManifestsFile=https://localhost:4321/temp/build/manifests.js";
@@ -111,14 +111,22 @@ export class LiveReloaderService implements ILiveReloaderService {
 
         this._debugConnected = v;
 
+        // Clear SPFx component manifest caches that cause "page stuck" when switching
+        // debug mode. Preserve only the placement preference from localStorage.
+        const placement = localStorage.getItem(PLACEMENT_STORAGE_KEY);
+        localStorage.clear();
+        if (placement) {
+            localStorage.setItem(PLACEMENT_STORAGE_KEY, placement);
+        }
+        sessionStorage.clear();
+
         if (!v) {
-            const sessionDebugItem = sessionStorage.getItem(SESSION_DEBUG_CONNECTED);
-            if (sessionDebugItem) {
-                sessionStorage.removeItem(SESSION_DEBUG_CONNECTED);
-            }
+            // Reset connected state so the toggle starts as OFF on the non-debug page
+            this.connected = false;
             const refreshUrl = location.protocol + '//' + location.host + location.pathname;
             window.location.href = refreshUrl;
         } else {
+            sessionStorage.setItem(SESSION_DEBUG_CONNECTED, 'true');
             const refreshUrl = location.protocol + '//' + location.host + location.pathname+DEBUG_QUERY_STRING;
             window.location.href = refreshUrl;
         }

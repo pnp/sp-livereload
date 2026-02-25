@@ -1,6 +1,5 @@
 /* eslint-disable */
 const pkg = require('../../../package.json');
-const yo = require('../../../.yo-rc.json');
 /* eslint-enable */
 
 import { IClientSideComponentManifest } from "@microsoft/sp-module-interfaces";
@@ -21,6 +20,7 @@ export class Credits {
 
     private _dialog: Dialog;
     private _dialogContent: HTMLElement;
+    private _spfxVersionItem!: HTMLLIElement;
 
     private _manifest: IClientSideComponentManifest;
 
@@ -101,9 +101,10 @@ export class Credits {
 
         menu.append(menuItemVersion);
 
-        const menuItemSPFxVersion = document.createElement('li');
+        const menuItemSPFxVersion = document.createElement('li') as HTMLLIElement;
         menuItemSPFxVersion.classList.add('menu-credit-item');
-        menuItemSPFxVersion.innerHTML = `<strong>SPFx Version:</strong> ${yo['@microsoft/generator-sharepoint'].version}`;
+        menuItemSPFxVersion.innerHTML = `<strong>SPFx Version:</strong> Detecting...`;
+        this._spfxVersionItem = menuItemSPFxVersion;
 
         menu.append(menuItemSPFxVersion);
 
@@ -165,6 +166,10 @@ export class Credits {
 
     }
 
+
+    public updateSPFxVersion(version: string | null): void {
+        this._spfxVersionItem.innerHTML = `<strong>SPFx Version:</strong> ${version ?? 'Not detected'}`;
+    }
 
     public get credits(): HTMLDialogElement {
         return this._dialog;

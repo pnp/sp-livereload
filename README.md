@@ -31,7 +31,7 @@ You can focus on your code rather than when it is time to reload your browser.
 
 ## Used SharePoint Framework Version
 
-![version](https://img.shields.io/badge/SPFx-1.22.1-green.svg)
+![version](https://img.shields.io/badge/SPFx-1.22.2-green.svg)
 
 ## Applies to
 
@@ -52,6 +52,8 @@ None so far.
 
 | Version | Date             | Comments        |
 | ------- | ---------------- | --------------- |
+| 1.3.3   | February 24, 2026 | Debug toggle fixes, runtime SPFx version detection, reload stuck fix |
+| 1.3     | February 6, 2026 | HMR control: pause/resume, pending updates badge, SPFx version detection |
 | 1.2     | January 28, 2026 | SPFx 1.22 Heft migration, placement toggle, WebSocket fixes |
 | 1.1     | July 23, 2024 | Credits and Branding Information added |
 | 1.0     | July 11, 2024 | Initial release |
@@ -82,7 +84,44 @@ For details look at the [CHANGELOG](CHANGELOG.md)
 
 ## Features
 
-For now just reload the Browser Window once the browser have been reloaded.
+### Automatic Browser Reload
+
+Monitors the SPFx webpack-dev-server for build completion and automatically refreshes the browser window. Works seamlessly with existing SPFx projects with **zero configuration**.
+
+### Dual-Mode Operation
+
+- **Modern Mode (SPFx 1.22+):** Intercepts the webpack Hot Module Replacement (HMR) infrastructure for fine-grained control over live reload updates.
+- **Legacy Mode (SPFx 1.0 - 1.21):** Uses WebSocket connection to `wss://localhost:4321/ws` for full-page reload on build completion.
+
+The correct mode is selected automatically at runtime based on SPFx version detection.
+
+### HMR Control (SPFx 1.22+)
+
+- **Pause / Resume:** Toggle to control when live reload updates are applied, so you can focus on debugging without unexpected refreshes.
+- **Pending Updates Badge:** Shows the count of blocked HMR updates while paused.
+- **Apply Button:** Manually apply accumulated changes on your terms without automatic reload.
+- **Session Persistence:** Pause state is persisted in session storage across page navigations.
+
+### Debug Mode Toggle
+
+- Toggle the debug manifest URL (`?debug=true&noredir=true&debugManifestsFile=...`) on or off with a single click.
+- Automatically clears SPFx component manifest caches when switching modes to prevent stale state.
+- Preserves your placement preference across debug mode toggles.
+
+### Flexible Placement
+
+- Position the Live Reloader bar at the **Header** (top) or **Footer** (bottom) of the page.
+- Placement preference is persisted in localStorage.
+
+### Theme Integration
+
+- Inherits SharePoint theme colors automatically.
+- Supports semantic and palette colors with real-time theme change detection.
+
+### Architecture Diagrams
+
+- [HMR Flow](docs/hmr-flow.svg) — How the HMR interceptor controls webpack hot updates
+- [Version Detection](docs/version-detection.svg) — How SPFx version is detected at runtime
 
 ## References
 

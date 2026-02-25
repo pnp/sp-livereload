@@ -1,3 +1,17 @@
+## 1.3.3 (2026-02-24)
+
+### Bug Fixes
+
+* **Debug Toggle:** Fixed "page stuck" issue when switching debug mode on/off by clearing SPFx component manifest caches from localStorage and sessionStorage (preserves placement preference)
+* **Debug Toggle:** Renamed session storage key from `spfx-debug` to `pnp-lr-debug` to avoid conflicts with other SPFx tooling
+* **Debug Toggle:** Debug connected state is now properly preserved across page navigations instead of being reset on initialization
+* **Debug Toggle:** Simplified plug icon logic to use `debugConnected` state directly, removing unreliable webpack HMR function detection for UI state
+* **Version Detection:** SPFx version is now detected at runtime instead of reading from static `.yo-rc.json`, which was unreliable in deployed scenarios
+
+### Changes
+
+* **Credits Panel:** SPFx version display now shows "Detecting..." on load and updates dynamically once runtime version detection completes
+
 ## 1.3.0 (2026-02-06)
 
 ### Features

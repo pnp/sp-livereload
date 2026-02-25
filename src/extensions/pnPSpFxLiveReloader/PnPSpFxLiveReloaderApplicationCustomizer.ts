@@ -47,7 +47,7 @@ export default class PnPSPFxLiveReloaderApplicationCustomizer
     // LogDebug('INIT LIVE RELOADER STATE\n\t', lrs, connectionResponse);
 
     if (connectionResponse && connectionResponse.status === 200) {
-      lrs.state = { available: true, connected: lrs.connected, debugConnected: false, paused: lrs.paused, pendingCount: lrs.pendingCount, modernMode: lrs.modernMode };
+      lrs.state = { available: true, connected: lrs.connected, debugConnected: lrs.debugConnected, paused: lrs.paused, pendingCount: lrs.pendingCount, modernMode: lrs.modernMode };
     } else {
       lrs.state = { available: false, connected: false, debugConnected: false, paused: false, pendingCount: 0, modernMode: false };
     }
